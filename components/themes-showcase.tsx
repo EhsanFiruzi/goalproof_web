@@ -1,4 +1,9 @@
+"use client";
+
+import { useState } from "react";
+import { Check } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
+import { cn } from "@/lib/utils";
 
 // رنگ‌ها مستقیم از custom_color_schemes.dart
 const palettes: { id: string; colors: [string, string] }[] = [
@@ -12,27 +17,54 @@ const palettes: { id: string; colors: [string, string] }[] = [
   { id: "violet", colors: ["#8B5CF6", "#A78BFA"] },
 ];
 
-export function ThemesShowcase({ d }: { d: Dictionary }) {
+export function ThemesShowcase({ themes }: { themes: Dictionary["themes"] }) {
+  const [active, setActive] = useState("goalproof");
+
+  // رنگ نور افق هیرو با پالت انتخاب‌شده عوض می‌شود
+  function pick(p: (typeof palettes)[number]) {
+    setActive(p.id);
+    const root = document.documentElement.style;
+    root.setProperty("--bloom-a", p.colors[0]);
+    root.setProperty("--bloom-b", p.colors[1]);
+  }
+
   return (
-    <section id="themes" className="mx-auto max-w-6xl px-5 py-16 md:py-24 border-t border-line">
-      <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-2xl font-bold md:text-4xl">{d.themes.title}</h2>
-        <p className="mt-4 leading-8 text-muted">{d.themes.subtitle}</p>
+    <section id="themes" className="mx-auto max-w-6xl border-t border-line px-5 py-16 md:py-24">
+      <div data-reveal className="mx-auto max-w-2xl text-center">
+        <h2 className="text-2xl font-bold md:text-4xl">{themes.title}</h2>
+        <p className="mt-4 leading-8 text-muted">{themes.subtitle}</p>
         <p className="mt-4 inline-block rounded-full border border-line bg-card px-4 py-1.5 text-sm text-muted">
-          {d.themes.countNote}
+          {themes.countNote}
         </p>
       </div>
+
       <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-        {palettes.map((p) => (
-          <li key={p.id} className="rounded-2xl border border-line bg-card p-4">
-            <div
-              aria-hidden
-              className="h-16 rounded-xl"
-              style={{ background: `linear-gradient(135deg, ${p.colors[0]}, ${p.colors[1]})` }}
-            />
-            <p className="mt-3 text-center text-sm font-medium">{d.themes.names[p.id]}</p>
-          </li>
-        ))}
+        {palettes.map((p, i) => {
+          const on = active === p.id;
+          return (
+            <li key={p.id} data-reveal style={{ "--reveal-delay": `${i * 50}ms` } as React.CSSProperties}>
+              <button
+                type="button"
+                aria-pressed={on}
+                onClick={() => pick(p)}
+                data-spotlight
+                className={cn(
+                  "w-full rounded-2xl border bg-card p-4 text-center transition hover:-translate-y-0.5",
+                  on ? "border-brand ring-1 ring-brand/60" : "border-line hover:border-white/30",
+                )}
+              >
+                <div
+                  aria-hidden
+                  className="grid h-16 place-items-center rounded-xl"
+                  style={{ background: `linear-gradient(135deg, ${p.colors[0]}, ${p.colors[1]})` }}
+                >
+                  {on && <Check className="size-6 text-white drop-shadow" />}
+                </div>
+                <span className="mt-3 block text-sm font-medium">{themes.names[p.id]}</span>
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

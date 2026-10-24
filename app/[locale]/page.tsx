@@ -14,6 +14,7 @@ import { Screenshots } from "@/components/screenshots";
 import { Faq } from "@/components/faq";
 import { FinalCta } from "@/components/final-cta";
 import { SiteFooter } from "@/components/site-footer";
+import { PageEffects } from "@/components/page-effects";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -66,15 +67,22 @@ export default async function HomePage({ params }: Props) {
       >
         {d.common.skip}
       </a>
+      <PageEffects />
       <SiteHeader locale={locale} d={d} />
       <main id="main">
         <Hero locale={locale} d={d} />
         <TrustStrip d={d} />
         <Features d={d} />
-        <Screenshots d={d} />
-        <BadgesShowcase d={d} />
-        <ThemesShowcase d={d} />
-        <Faq d={d} />
+        <div data-reveal>
+          <Screenshots d={d} />
+        </div>
+        <div data-reveal>
+          <BadgesShowcase d={d} />
+        </div>
+        <ThemesShowcase themes={d.themes} />
+        <div data-reveal>
+          <Faq d={d} />
+        </div>
         <FinalCta locale={locale} d={d} />
       </main>
       <SiteFooter locale={locale} d={d} />

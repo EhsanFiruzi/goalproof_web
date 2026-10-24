@@ -32,17 +32,23 @@ export function SiteHeader({ locale, d }: { locale: Locale; d: Dictionary }) {
         </nav>
 
         <div className="flex items-center gap-2">
+          {/* دسکتاپ: زبان + دانلود */}
           <LanguageSwitcher target={other} label={d.common.otherLangLabel} className="hidden md:inline-flex" />
-          {/* دکمه‌ی هدر به بخش دانلود (با آیکن رسمی مایکت) هدایت می‌کند */}
           <a
             href="#download"
             data-cta="header"
             data-cta-destination="download-section"
-            className="inline-flex min-h-10 items-center rounded-xl bg-brand px-4 text-sm font-bold text-white transition hover:brightness-110"
+            className="hidden min-h-10 items-center rounded-xl bg-brand px-4 text-sm font-bold text-white transition hover:brightness-110 md:inline-flex"
           >
             {d.common.headerCta}
           </a>
-          <MobileMenu label={d.common.menu} navLabel={d.nav.menuLabel} links={links}>
+          {/* موبایل: فقط یک دکمه‌ی منو؛ دانلود و زبان داخل منو هستند */}
+          <MobileMenu
+            label={d.common.menu}
+            navLabel={d.nav.menuLabel}
+            links={links}
+            cta={{ href: "#download", label: d.common.headerCta }}
+          >
             <LanguageSwitcher target={other} label={d.common.otherLangLabel} className="w-full justify-center" />
           </MobileMenu>
         </div>

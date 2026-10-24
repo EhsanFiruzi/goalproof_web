@@ -32,18 +32,24 @@ export function Features({ d }: { d: Dictionary }) {
   return (
     <section id="features" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
       <div className="grid gap-10 lg:grid-cols-[0.8fr_2.2fr] lg:gap-12">
-        <div>
+        <div data-reveal>
           <Eyebrow>{d.features.eyebrow}</Eyebrow>
           <h2 className="mt-5 text-2xl leading-[1.5] font-bold md:text-4xl">{d.features.title}</h2>
           <p className="mt-4 leading-8 text-muted">{d.features.subtitle}</p>
         </div>
 
         <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {d.features.items.map((f) => {
+          {d.features.items.map((f, i) => {
             const Icon = icons[f.icon];
             const imgs = medals[f.icon];
             return (
-              <li key={f.title} className="flex flex-col rounded-2xl border border-line bg-card p-5">
+              <li
+                key={f.title}
+                data-reveal
+                data-spotlight
+                style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
+                className="flex flex-col rounded-2xl border border-line bg-card p-5 hover:border-brand/50"
+              >
                 <span className={`mb-4 grid size-11 place-items-center rounded-xl ${tints[f.icon]}`}>
                   <Icon className="size-5" aria-hidden />
                 </span>
