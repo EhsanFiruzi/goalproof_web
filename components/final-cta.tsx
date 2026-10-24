@@ -1,33 +1,13 @@
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import { Eyebrow } from "./eyebrow";
-import Galaxy from "./Galaxy";
-import "./Galaxy.css";
+import { GalaxyBackdrop } from "./galaxy-backdrop";
 import { MyketButton } from "./myket-button";
 
 export function FinalCta({ locale, d }: { locale: Locale; d: Dictionary }) {
   return (
     <section id="download" className="relative isolate overflow-hidden border-t border-line bg-bg">
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_90%_at_50%_120%,rgba(108,99,255,0.3),transparent_70%)]" />
-        <Galaxy
-          transparent
-          starColors={["#ffffff", "#9b8cff", "#ffc46b", "#ff6b6b"]}
-          density={1}
-          glowIntensity={0.35}
-          flareIntensity={1}
-          twinkleIntensity={0.4}
-          starSpeed={0.4}
-          rotationSpeed={0.05}
-          layers={4}
-          mouseRepulsion
-          repulsionStrength={2}
-          clickWarp
-          intro
-        />
-        {/* محو شدن لبهٔ بالا با بخش قبلی */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-bg to-transparent" />
-      </div>
+      <GalaxyBackdrop />
 
       <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-24 md:grid-cols-2 md:py-32">
         <div data-reveal>
