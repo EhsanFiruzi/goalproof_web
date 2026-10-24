@@ -24,3 +24,6 @@ export const SCREENSHOTS = [
   "Screenshot_1784750855.png",
   "Screenshot_1784750868.png",
 ].map((f) => `/app_screen_shot/${f}`);
+
+// ابعاد واقعی اسکرین‌شات‌ها (روی یکی از فایل‌ها Properties > Details بزنید)
+export const SCREENSHOT_SIZE = { width: 1080, height: 2400 } as const;

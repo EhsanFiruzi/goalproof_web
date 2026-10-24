@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
-import { SCREENSHOTS } from "@/lib/site";
+import { SCREENSHOTS, SCREENSHOT_SIZE } from "@/lib/site";
 import { MyketButton } from "./myket-button";
 
 const floating = [
@@ -50,14 +50,15 @@ export function Hero({ locale, d }: { locale: Locale; d: Dictionary }) {
 
         <div className="relative mx-auto w-[240px] sm:w-[290px]">
           <div aria-hidden className="absolute inset-0 -z-10 scale-110 animate-pulse-glow rounded-full bg-brand/30 blur-3xl" />
-          <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2.4rem] border-[7px] border-surface bg-card shadow-2xl shadow-brand/20">
+          <div className="relative overflow-hidden rounded-[2.4rem] border-[7px] border-surface bg-card shadow-2xl shadow-brand/20">
             <Image
               src={SCREENSHOTS[0]}
               alt={`${d.screens.alt} 1`}
-              fill
+              width={SCREENSHOT_SIZE.width}
+              height={SCREENSHOT_SIZE.height}
               priority
               sizes="(max-width: 640px) 240px, 290px"
-              className="object-cover object-top"
+              className="block h-auto w-full"
             />
           </div>
           {floating.map((f) => (

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { Dictionary } from "@/lib/i18n/types";
-import { SCREENSHOTS } from "@/lib/site";
+import { SCREENSHOTS, SCREENSHOT_SIZE } from "@/lib/site";
 
 export function Screenshots({ d }: { d: Dictionary }) {
   return (
@@ -10,20 +10,21 @@ export function Screenshots({ d }: { d: Dictionary }) {
         <p className="mt-4 text-muted">{d.screens.subtitle}</p>
       </div>
       <ul
-        className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 md:px-[max(1.25rem,calc((100vw-72rem)/2))]"
+        className="no-scrollbar mt-12 flex snap-x snap-mandatory items-start gap-5 overflow-x-auto px-5 pb-4 md:px-[max(1.25rem,calc((100vw-72rem)/2))]"
         tabIndex={0}
         aria-label={d.screens.title}
       >
         {SCREENSHOTS.map((src, i) => (
           <li key={src} className="w-[200px] shrink-0 snap-center sm:w-[230px]">
-            <div className="relative aspect-[9/19.5] overflow-hidden rounded-3xl border-[5px] border-surface bg-card">
+            <div className="overflow-hidden rounded-3xl border-[5px] border-surface bg-card">
               <Image
                 src={src}
                 alt={`${d.screens.alt} ${i + 1}`}
-                fill
+                width={SCREENSHOT_SIZE.width}
+                height={SCREENSHOT_SIZE.height}
                 loading="lazy"
                 sizes="230px"
-                className="object-cover object-top"
+                className="block h-auto w-full"
               />
             </div>
           </li>

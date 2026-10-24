@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { Target } from "lucide-react";
+import Image from "next/image";
 import type { Locale } from "@/lib/i18n/config";
 import { otherLocale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import { SITE } from "@/lib/site";
 import { MyketButton } from "./myket-button";
+
 
 export function SiteHeader({ locale, d }: { locale: Locale; d: Dictionary }) {
   const links = [
@@ -19,9 +20,14 @@ export function SiteHeader({ locale, d }: { locale: Locale; d: Dictionary }) {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line/60 bg-bg/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
         <Link href={`/${locale}`} className="flex items-center gap-2 font-bold" aria-label={SITE.name}>
-          <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-brand to-coral">
-            <Target className="size-5" aria-hidden />
-          </span>
+          <Image
+            src="/app-icon.png"
+            alt=""
+            width={36}
+            height={36}
+            className="size-9 rounded-xl"
+            priority
+          />
           <span className="text-lg">{locale === "fa" ? SITE.nameFa : SITE.name}</span>
         </Link>
 
