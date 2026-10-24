@@ -6,6 +6,7 @@ import { buildJsonLd } from "@/lib/jsonld";
 import { JsonLd } from "@/components/json-ld";
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
+import { TrustStrip } from "@/components/trust-strip";
 import { Features } from "@/components/features";
 import { BadgesShowcase } from "@/components/badges-showcase";
 import { ThemesShowcase } from "@/components/themes-showcase";
@@ -68,10 +69,11 @@ export default async function HomePage({ params }: Props) {
       <SiteHeader locale={locale} d={d} />
       <main id="main">
         <Hero locale={locale} d={d} />
+        <TrustStrip d={d} />
         <Features d={d} />
+        <Screenshots d={d} />
         <BadgesShowcase d={d} />
         <ThemesShowcase d={d} />
-        <Screenshots d={d} />
         <Faq d={d} />
         <FinalCta locale={locale} d={d} />
       </main>

@@ -14,14 +14,17 @@ const palettes: { id: string; colors: [string, string] }[] = [
 
 export function ThemesShowcase({ d }: { d: Dictionary }) {
   return (
-    <section id="themes" className="mx-auto max-w-6xl px-5 py-20 md:py-28">
+    <section id="themes" className="mx-auto max-w-6xl px-5 py-16 md:py-24 border-t border-line">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold md:text-4xl">{d.themes.title}</h2>
+        <h2 className="text-2xl font-bold md:text-4xl">{d.themes.title}</h2>
         <p className="mt-4 leading-8 text-muted">{d.themes.subtitle}</p>
+        <p className="mt-4 inline-block rounded-full border border-line bg-card px-4 py-1.5 text-sm text-muted">
+          {d.themes.countNote}
+        </p>
       </div>
-      <ul className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
         {palettes.map((p) => (
-          <li key={p.id} className="rounded-2xl border border-line bg-card p-4 transition hover:border-brand/60">
+          <li key={p.id} className="rounded-2xl border border-line bg-card p-4">
             <div
               aria-hidden
               className="h-16 rounded-xl"

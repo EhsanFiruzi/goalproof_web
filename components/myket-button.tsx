@@ -6,19 +6,23 @@ import { cn } from "@/lib/utils";
 interface Props {
   locale: Locale;
   label: string;
-  alt: string;
+  alt?: string;
+  /** برای اندازه‌گیری تبدیل در آینده */
+  placement: "hero" | "final";
   className?: string;
   imgClassName?: string;
 }
 
-/** تنها دکمه‌ی دانلود در کل سایت: آیکن رسمی مایکت */
-export function MyketButton({ locale, label, alt, className, imgClassName }: Props) {
+/** تنها دکمه‌ی دانلود در سایت: آیکن رسمی مایکت */
+export function MyketButton({ locale, label, alt, placement, className, imgClassName }: Props) {
   return (
     <a
       href={SITE.myket}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
+      data-cta={placement}
+      data-cta-destination="myket"
       className={cn(
         "inline-block rounded-xl transition duration-200 hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
         className,
@@ -26,7 +30,7 @@ export function MyketButton({ locale, label, alt, className, imgClassName }: Pro
     >
       <Image
         src={`/svg_icons/get_from_myket-${locale}.svg`}
-        alt={alt}
+        alt={alt ?? label}
         width={200}
         height={60}
         unoptimized

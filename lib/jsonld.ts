@@ -26,7 +26,7 @@ export function buildJsonLd(locale: Locale, d: Dictionary) {
         downloadUrl: SITE.myket,
         installUrl: SITE.myket,
         inLanguage: locale,
-        screenshot: SCREENSHOTS.slice(0, 5).map((s) => `${SITE.url}${s}`),
+        screenshot: SCREENSHOTS.slice(0, 5).map((s) => `${SITE.url}${s.src}`),
         author: { "@type": "Person", name: SITE.author, url: SITE.myketDev },
         featureList: d.features.items.map((i) => i.title),
       },

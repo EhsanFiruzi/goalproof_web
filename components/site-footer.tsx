@@ -1,8 +1,9 @@
-import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import { otherLocale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import { SITE } from "@/lib/site";
+import { BrandLogo } from "./brand-logo";
+import { LanguageSwitcher } from "./language-switcher";
 
 export function SiteFooter({ locale, d }: { locale: Locale; d: Dictionary }) {
   const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
@@ -10,7 +11,7 @@ export function SiteFooter({ locale, d }: { locale: Locale; d: Dictionary }) {
     <footer className="border-t border-line">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-3">
         <div>
-          <p className="text-lg font-bold">{locale === "fa" ? SITE.nameFa : SITE.name}</p>
+          <BrandLogo locale={locale} />
           <p className="mt-2 max-w-xs text-sm leading-7 text-muted">{d.footer.tagline}</p>
         </div>
         <div>
@@ -26,9 +27,7 @@ export function SiteFooter({ locale, d }: { locale: Locale; d: Dictionary }) {
             {SITE.email}
           </a>
           <div className="mt-4">
-            <Link href={`/${otherLocale(locale)}`} hrefLang={otherLocale(locale)} className="text-sm text-muted hover:text-white">
-              {d.common.otherLangLabel}
-            </Link>
+            <LanguageSwitcher target={otherLocale(locale)} label={d.common.otherLangLabel} />
           </div>
         </div>
       </div>
