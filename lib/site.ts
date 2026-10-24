@@ -61,4 +61,4 @@ const FILES = [
 ];
 
 /** id همان نام فایل است؛ کپشن هر تصویر در dictionary زیر screens.captions با همین id نوشته می‌شود */
-export const SCREENSHOTS = FILES.map((id) => ({ id, src: `/app_screen_shot/${id}.png` }));
+export const SCREENSHOTS = FILES.map((id) => ({ id, src: `/app_screen_shot/${id}.webp` }));
