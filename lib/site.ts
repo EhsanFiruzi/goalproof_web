@@ -31,10 +31,22 @@ function resolveSiteUrl(): string {
   return url.origin;
 }
 
+/** مسیر پایه برای ریپوی پروژه‌ای ("/repo")؛ برای سایت ریشه‌ای رشته‌ی خالی */
+const rawBase = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").trim().replace(/\/+$/, "");
+export const BASE_PATH = rawBase && !rawBase.startsWith("/") ? `/${rawBase}` : rawBase;
+
+/** برای فایل‌های public که با <Image src> یا <img> استفاده می‌شوند */
+export const withBase = (path: string) => `${BASE_PATH}${path.startsWith("/") ? path : `/${path}`}`;
+
+const origin = resolveSiteUrl();
+
 export const SITE = {
   name: "GoalProof",
   nameFa: "گل‌پروف",
-  url: resolveSiteUrl(),
+  /** فقط origin، مثل https://user.github.io */
+  url: origin,
+  /** origin + basePath، مبنای canonical و sitemap و ... */
+  home: `${origin}${BASE_PATH}`,
   packageId: "ir.ehsan.goalproof",
   myket: "https://myket.ir/app/ir.ehsan.goalproof",
   myketDev: "https://myket.ir/developer/dev-105207",
@@ -61,4 +73,4 @@ const FILES = [
 ];
 
 /** id همان نام فایل است؛ کپشن هر تصویر در dictionary زیر screens.captions با همین id نوشته می‌شود */
-export const SCREENSHOTS = FILES.map((id) => ({ id, src: `/app_screen_shot/${id}.webp` }));
+export const SCREENSHOTS = FILES.map((id) => ({ id, src: withBase(`/app_screen_shot/${id}.webp`) }));

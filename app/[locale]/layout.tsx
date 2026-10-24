@@ -19,8 +19,10 @@ const vazir = localFont({
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
-export const metadata: Metadata = { metadataBase: new URL(SITE.url) };
+export const metadata: Metadata = { metadataBase: new URL(SITE.home) };
 export const viewport: Viewport = { themeColor: "#05050A", colorScheme: "dark" };
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));

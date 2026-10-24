@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Flame, LayoutTemplate, Palette, RotateCcw, Target, Trophy } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
+import { withBase } from "@/lib/site";
 import { Eyebrow } from "./eyebrow";
 
 type Icon = Dictionary["features"]["items"][number]["icon"];
@@ -58,7 +59,7 @@ export function Features({ d }: { d: Dictionary }) {
                 {imgs && (
                   <div className="mt-auto flex items-center justify-center gap-3 pt-5">
                     {imgs.map((m) => (
-                      <Image key={m} src={`/badges/${m}.svg`} alt="" aria-hidden width={56} height={56} unoptimized className="size-14" />
+                      <Image key={m} src={withBase(`/badges/${m}.svg`)} alt="" aria-hidden width={56} height={56} unoptimized className="size-14" />
                     ))}
                   </div>
                 )}

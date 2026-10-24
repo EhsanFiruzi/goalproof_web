@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SITE } from "@/lib/site";
+import { SITE, withBase } from "@/lib/site";
 import type { Locale } from "@/lib/i18n/config";
 import { cn } from "@/lib/utils";
 
@@ -29,7 +29,7 @@ export function MyketButton({ locale, label, alt, placement, className, imgClass
       )}
     >
       <Image
-        src={`/svg_icons/get_from_myket-${locale}.svg`}
+        src={withBase(`/svg_icons/get_from_myket-${locale}.svg`)}
         alt={alt ?? label}
         width={200}
         height={60}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 import type { BadgeItem, Dictionary } from "@/lib/i18n/types";
+import { withBase } from "@/lib/site";
 import { Eyebrow } from "./eyebrow";
 import { HScroller } from "./h-scroller";
 
@@ -17,7 +18,7 @@ export function BadgesShowcase({ d }: { d: Dictionary }) {
     ...b.special.map((x) => ({ ...x, folder: "special" as const })),
   ];
   const featured = b.featured.map((id) => all.find((m) => m.id === id)).filter((m): m is Entry => Boolean(m));
-  const src = (m: Entry) => `/badges/${m.folder}/${m.file}.svg`;
+  const src = (m: Entry) => withBase(`/badges/${m.folder}/${m.file}.svg`);
 
   return (
     <section id="badges" className="relative overflow-hidden py-16 md:py-24">

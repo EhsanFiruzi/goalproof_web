@@ -3,14 +3,14 @@ import type { Locale } from "./i18n/config";
 import type { Dictionary } from "./i18n/types";
 
 export function buildJsonLd(locale: Locale, d: Dictionary) {
-  const url = `${SITE.url}/${locale}`;
+  const url = `${SITE.home}/${locale}`;
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": `${SITE.url}/#website`,
-        url: SITE.url,
+        "@id": `${SITE.home}/#website`,
+        url: SITE.home,
         name: SITE.name,
         inLanguage: ["fa", "en"],
       },
@@ -26,6 +26,7 @@ export function buildJsonLd(locale: Locale, d: Dictionary) {
         downloadUrl: SITE.myket,
         installUrl: SITE.myket,
         inLanguage: locale,
+        // src اسکرین‌شات‌ها از قبل basePath دارد؛ فقط origin اضافه می‌شود
         screenshot: SCREENSHOTS.slice(0, 5).map((s) => `${SITE.url}${s.src}`),
         author: { "@type": "Person", name: SITE.author, url: SITE.myketDev },
         featureList: d.features.items.map((i) => i.title),
